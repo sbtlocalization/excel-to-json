@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: © 2026 SBT Localization https://sbt.localization.com.ua
+# SPDX-FileContributor: Serhii Olendarenko <sergey.olendarenko@gmail.com>
+#
+# SPDX-License-Identifier: BlueOak-1.0.0
+
+name: "Install excel-to-json"
+description: "Download and install the newest excel-to-json release"
+author: "sbtlocalization"
+branding:
+  icon: "download"
+  color: "blue"
+
+inputs:
+  token:
+    description: "GitHub token for API requests"
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  version:
+    description: "The installed version"
+    value: ${{ steps.install-linux.outputs.tag || steps.install-macos.outputs.tag || steps.install-windows.outputs.tag }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install excel-to-json (Linux)
+      id: install-linux
+      if: runner.os == 'Linux'
+      uses: jaxxstorm/action-install-gh-release@ad13454142cbb633d17d7e526e829c04f739492f
+      with:
+        repo: sbtlocalization/excel-to-json
+        token: ${{ inputs.token }}
+        cache: enable
+        platform: linux
+
+    - name: Install excel-to-json (macOS)
+      id: install-macos
+      if: runner.os == 'macOS'
+      uses: jaxxstorm/action-install-gh-release@ad13454142cbb633d17d7e526e829c04f739492f
+      with:
+        repo: sbtlocalization/excel-to-json
+        token: ${{ inputs.token }}
+        cache: enable
+        platform: macos
+        arch: all
+
+    - name: Install excel-to-json (Windows)
+      id: install-windows
+      if: runner.os == 'Windows'
+      uses: jaxxstorm/action-install-gh-release@ad13454142cbb633d17d7e526e829c04f739492f
+      with:
+        repo: sbtlocalization/excel-to-json
+        token: ${{ inputs.token }}
+        cache: enable
+        platform: windows

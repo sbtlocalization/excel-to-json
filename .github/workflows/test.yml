@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: © 2026 SBT Localization https://sbt.localization.com.ua
+# SPDX-FileContributor: Serhii Olendarenko <sergey.olendarenko@gmail.com>
+#
+# SPDX-License-Identifier: BlueOak-1.0.0
+
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }})
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Set up Go
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e
+        with:
+          go-version-file: go.mod
+
+      - name: Test
+        run: go test ./...
+
+  action:
+    # Installs the newest published release, so it fails until the first
+    # release has been published.
+    name: Action (${{ matrix.os }})
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Install excel-to-json
+        uses: ./
+        id: install
+
+      - name: Verify installation
+        run: excel-to-json --version
