@@ -27,7 +27,7 @@ runs:
     - name: Install excel-to-json (Linux)
       id: install-linux
       if: runner.os == 'Linux'
-      uses: jaxxstorm/action-install-gh-release@ad13454142cbb633d17d7e526e829c04f739492f
+      uses: jaxxstorm/action-install-gh-release@b82b2052fdf822192f2119b7e289a6f63e668bc8
       with:
         repo: sbtlocalization/excel-to-json
         token: ${{ inputs.token }}
@@ -37,7 +37,7 @@ runs:
     - name: Install excel-to-json (macOS)
       id: install-macos
       if: runner.os == 'macOS'
-      uses: jaxxstorm/action-install-gh-release@ad13454142cbb633d17d7e526e829c04f739492f
+      uses: jaxxstorm/action-install-gh-release@b82b2052fdf822192f2119b7e289a6f63e668bc8
       with:
         repo: sbtlocalization/excel-to-json
         token: ${{ inputs.token }}
@@ -48,7 +48,7 @@ runs:
     - name: Install excel-to-json (Windows)
       id: install-windows
       if: runner.os == 'Windows'
-      uses: jaxxstorm/action-install-gh-release@ad13454142cbb633d17d7e526e829c04f739492f
+      uses: jaxxstorm/action-install-gh-release@b82b2052fdf822192f2119b7e289a6f63e668bc8
       with:
         repo: sbtlocalization/excel-to-json
         token: ${{ inputs.token }}
